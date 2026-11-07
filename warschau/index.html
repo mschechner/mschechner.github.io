@@ -1,0 +1,1049 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Warschau Halbmarathon-Wochenende</title>
+<meta name="description" content="Unser verlängertes Wochenende zum Halbmarathon Warschau am 14. März 2027: Hotels, Restaurants und ein Samstag voller Highlights.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<style>
+:root{
+  --bg:#f7f4ef; --surface:#ffffff; --surface-2:#f0ebe3; --ink:#1c2230; --muted:#5d6475;
+  --line:#e2dbd0; --accent:#d7263d; --accent-ink:#ffffff; --accent-soft:#fbe3e6;
+  --blue:#1f4e79; --blue-soft:#e3edf7; --green:#2e7d4f; --green-soft:#e2f2e8;
+  --gold:#b7791f; --gold-soft:#fbf0dc; --shadow:0 1px 2px rgba(20,25,40,.06),0 6px 24px rgba(20,25,40,.06);
+  --story-gold:#f4c26b;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#12151c; --surface:#1b1f29; --surface-2:#232835; --ink:#eef0f5; --muted:#a3a9b8;
+    --line:#2f3545; --accent:#ff5a6e; --accent-ink:#1b0a0d; --accent-soft:#3a1d23;
+    --blue:#8cb8e6; --blue-soft:#1d2a3b; --green:#6fcf97; --green-soft:#17301f;
+    --gold:#f0b860; --gold-soft:#33291a; --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 24px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12151c; --surface:#1b1f29; --surface-2:#232835; --ink:#eef0f5; --muted:#a3a9b8;
+  --line:#2f3545; --accent:#ff5a6e; --accent-ink:#1b0a0d; --accent-soft:#3a1d23;
+  --blue:#8cb8e6; --blue-soft:#1d2a3b; --green:#6fcf97; --green-soft:#17301f;
+  --gold:#f0b860; --gold-soft:#33291a; --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 24px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--blue)}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.12;margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+section{padding:64px 0}
+.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.lead{color:var(--muted);max-width:720px;margin:10px 0 0}
+h2{font-size:clamp(1.8rem,3.6vw,2.6rem);margin-top:6px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+/* ---------- nav ---------- */
+nav.top{position:fixed;top:0;left:0;right:0;z-index:1000;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+nav.top.solid{background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);border-bottom-color:var(--line)}
+nav.top .wrap{display:flex;align-items:center;gap:8px;height:56px}
+nav.top .brand{font-family:Fraunces,serif;font-weight:800;margin-right:auto;white-space:nowrap;color:#fff}
+nav.top .links{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav.top .links::-webkit-scrollbar{display:none}
+nav.top .links a{color:#fff;text-decoration:none;font-size:.9rem;font-weight:500;padding:6px 10px;border-radius:8px;white-space:nowrap}
+nav.top.solid .brand, nav.top.solid .links a{color:var(--ink)}
+nav.top .links a:hover{background:rgba(255,255,255,.15)}
+nav.top.solid .links a:hover{background:var(--surface-2)}
+.theme-btn{border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);color:#fff;border-radius:8px;height:34px;width:34px;cursor:pointer;flex:none}
+nav.top.solid .theme-btn{border-color:var(--line);background:var(--surface);color:var(--ink)}
+@media (max-width:640px){nav.top .brand{display:none}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:#0b0d12}
+.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kenburns 28s ease-in-out infinite alternate}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,10,16,.55) 0%,rgba(8,10,16,.15) 35%,rgba(8,10,16,.85) 100%)}
+.hero .wrap{position:relative;z-index:1;padding-top:110px;padding-bottom:48px;width:100%}
+.hero .eyebrow{color:var(--story-gold)}
+.hero h1{font-size:clamp(2.6rem,8vw,5.6rem);font-weight:800;letter-spacing:-.015em;margin-top:12px;text-shadow:0 4px 30px rgba(0,0,0,.4)}
+.hero h1 em{font-style:italic;color:var(--story-gold)}
+.hero p.sub{font-size:clamp(1rem,2vw,1.2rem);max-width:640px;margin:18px 0 0;color:rgba(255,255,255,.88)}
+.countdown{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}
+.cd{background:rgba(255,255,255,.12);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:10px 14px;min-width:78px;text-align:center}
+.cd b{display:block;font:800 1.8rem/1 Fraunces,serif}
+.cd small{font-size:.7rem;opacity:.8;text-transform:uppercase;letter-spacing:.1em}
+.cd.red{background:#d7263d;border-color:#d7263d}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:22px}
+.fact{background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:12px 14px}
+.fact b{display:block;font-size:1.05rem}
+.fact small{color:rgba(255,255,255,.75)}
+.scroll-hint{display:inline-flex;gap:8px;align-items:center;margin-top:26px;color:rgba(255,255,255,.8);font-size:.85rem;text-decoration:none}
+.scroll-hint span{display:inline-block;animation:bob 1.8s ease-in-out infinite}
+.note{margin-top:22px;font-size:.88rem;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:10px 14px;max-width:760px}
+@keyframes kenburns{from{transform:scale(1.02) translate(0,0)}to{transform:scale(1.18) translate(-2%,-2%)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* ---------- days ---------- */
+.days{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:28px}
+.day{position:relative;border-radius:18px;overflow:hidden;min-height:340px;color:#fff;display:flex;align-items:flex-end;box-shadow:var(--shadow);background:#111}
+.day img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s ease}
+.day:hover img{transform:scale(1.06)}
+.day:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.85) 70%)}
+.day .in{position:relative;z-index:1;padding:20px}
+.day .d{display:inline-block;font-weight:700;font-size:.78rem;padding:3px 10px;border-radius:99px;background:rgba(255,255,255,.18);backdrop-filter:blur(6px)}
+.day h3{font-size:1.5rem;margin:10px 0 8px}
+.day ul{margin:0;padding-left:18px;color:rgba(255,255,255,.85);font-size:.93rem}
+.day li{margin:3px 0}
+.day.race .d{background:#d7263d}
+
+/* ---------- STORY (fullscreen swipe) ---------- */
+.story-intro{padding-bottom:28px}
+.story{position:relative;height:100svh;min-height:560px;background:#07080c;color:#fff;overflow:hidden}
+.story:fullscreen{height:100vh}
+.track{display:flex;height:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;scroll-behavior:smooth}
+.track::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;height:100%;scroll-snap-align:start;scroll-snap-stop:always;position:relative;overflow:hidden}
+.slide .bg{position:absolute;inset:-2%;width:104%;height:104%;object-fit:cover;transform:scale(1.18);transition:transform 9s cubic-bezier(.2,.6,.2,1),opacity .6s;will-change:transform}
+.slide.active .bg{transform:scale(1.02)}
+.slide .shade{position:absolute;inset:0;background:
+  linear-gradient(90deg,rgba(6,8,12,.88) 0%,rgba(6,8,12,.55) 42%,rgba(6,8,12,.05) 75%),
+  linear-gradient(0deg,rgba(6,8,12,.7) 0%,transparent 40%)}
+@media (max-width:820px){.slide .shade{background:linear-gradient(0deg,rgba(6,8,12,.94) 0%,rgba(6,8,12,.78) 45%,rgba(6,8,12,.1) 80%,rgba(6,8,12,.45) 100%)}}
+.slide .bignum{position:absolute;right:4vw;top:8vh;font:800 clamp(7rem,22vw,20rem)/1 Fraunces,serif;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.18);pointer-events:none;opacity:0;transform:translateX(60px);transition:all 1.2s ease .2s}
+.slide.active .bignum{opacity:1;transform:none}
+@media (max-width:820px){.slide .bignum{top:76px;right:12px;font-size:7rem}}
+.slide .content{position:absolute;left:0;bottom:0;width:min(640px,100%);padding:0 clamp(16px,5vw,64px) clamp(84px,12vh,120px);max-height:100%;overflow-y:auto;scrollbar-width:none}
+.slide .content::-webkit-scrollbar{display:none}
+.a{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--d,0) * 110ms + 150ms)}
+.slide.active .a{opacity:1;transform:none}
+.kicker{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--story-gold)}
+.kicker .dot{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.6}
+.slide h3{font-size:clamp(2.1rem,5.4vw,4.2rem);font-weight:800;margin:10px 0 6px;letter-spacing:-.01em;text-shadow:0 4px 30px rgba(0,0,0,.5)}
+.slide .tagline{font:italic 600 clamp(1.05rem,2vw,1.35rem)/1.35 Fraunces,serif;color:rgba(255,255,255,.92);margin:0 0 12px}
+.slide p.desc{color:rgba(255,255,255,.82);margin:0 0 14px;font-size:clamp(.92rem,1.4vw,1rem)}
+.see{list-style:none;padding:0;margin:0 0 16px;display:grid;gap:7px}
+.see li{display:flex;gap:10px;align-items:flex-start;font-size:.93rem;color:rgba(255,255,255,.9)}
+.see li b{color:#fff}
+.see li:before{content:"✦";color:var(--story-gold);flex:none;margin-top:1px}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.pill{font-size:.76rem;font-weight:600;padding:5px 10px;border-radius:99px;background:rgba(255,255,255,.14);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.18)}
+.pill.hot{background:#d7263d;border-color:#d7263d}
+.pill.gold{background:rgba(244,194,107,.2);border-color:rgba(244,194,107,.5);color:var(--story-gold)}
+.thumbs{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.thumb{position:relative;width:112px;height:80px;border-radius:12px;overflow:hidden;border:2px solid rgba(255,255,255,.35);cursor:zoom-in;padding:0;background:#222;flex:none;transition:transform .3s,border-color .3s}
+.thumb:hover{transform:translateY(-3px);border-color:#fff}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb span{position:absolute;left:0;right:0;bottom:0;font-size:.66rem;font-weight:600;padding:12px 6px 4px;background:linear-gradient(transparent,rgba(0,0,0,.85));text-align:left;color:#fff}
+@media (max-width:480px){.thumb{width:92px;height:66px}}
+.sbtns{display:flex;flex-wrap:wrap;gap:8px}
+.sbtn{display:inline-flex;align-items:center;gap:6px;font:600 .86rem Inter,sans-serif;padding:9px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);backdrop-filter:blur(8px);color:#fff;text-decoration:none;cursor:pointer}
+.sbtn:hover{background:rgba(255,255,255,.22)}
+.sbtn.primary{background:#fff;color:#111;border-color:#fff}
+/* dishes */
+.dishes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:16px;max-width:520px}
+.dishcard{border-radius:14px;overflow:hidden;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(10px);cursor:zoom-in;text-align:left;padding:0;color:#fff;font:inherit}
+.dishcard img{width:100%;height:110px;object-fit:cover;display:block;transition:transform .6s}
+.dishcard:hover img{transform:scale(1.07)}
+.dishcard div{padding:8px 10px 10px}
+.dishcard b{display:block;font-size:.9rem}
+.dishcard small{color:rgba(255,255,255,.72);font-size:.76rem;line-height:1.35;display:block}
+@media (max-width:480px){.dishcard img{height:84px}}
+/* cover/finale slides */
+.slide.cover .content{width:min(860px,100%)}
+.slide.cover h3{font-size:clamp(2.8rem,8vw,6.4rem)}
+.swipehint{display:inline-flex;gap:10px;align-items:center;margin-top:8px;font-weight:600;color:rgba(255,255,255,.9)}
+.swipehint i{display:inline-block;font-style:normal;animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(10px)}}
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px;max-width:720px}
+.toc button{font:600 .8rem Inter,sans-serif;color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:6px 11px;cursor:pointer;backdrop-filter:blur(8px)}
+.toc button:hover{background:rgba(255,255,255,.25)}
+/* story chrome */
+.progress{position:absolute;top:14px;left:clamp(16px,5vw,64px);right:clamp(16px,5vw,64px);display:flex;gap:5px;z-index:5}
+.progress button{flex:1;height:4px;border-radius:4px;background:rgba(255,255,255,.25);border:0;padding:0;cursor:pointer;position:relative;overflow:hidden}
+.progress button i{position:absolute;inset:0;background:#fff;transform:scaleX(0);transform-origin:left}
+.progress button.seen i{transform:scaleX(1)}
+.progress button.cur i{transform:scaleX(1)}
+.story.playing .progress button.cur i{transform:scaleX(0);animation:fill var(--dur,8s) linear forwards}
+@keyframes fill{to{transform:scaleX(1)}}
+.story .bar{position:absolute;left:clamp(16px,5vw,64px);right:clamp(16px,5vw,64px);bottom:22px;display:flex;align-items:center;gap:10px;z-index:5}
+.story .counter{font:700 .85rem Inter,sans-serif;letter-spacing:.08em;margin-right:auto;color:rgba(255,255,255,.85)}
+.story .counter b{font:800 1.4rem Fraunces,serif;color:#fff}
+.round{width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(10,12,18,.45);backdrop-filter:blur(10px);color:#fff;font-size:1.1rem;cursor:pointer;display:grid;place-items:center;transition:background .2s,transform .2s}
+.round:hover{background:rgba(255,255,255,.25);transform:scale(1.06)}
+.round:disabled{opacity:.3;cursor:default;transform:none}
+.round.small{width:40px;height:40px;font-size:.95rem}
+.side-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:5}
+.side-arrow.l{left:12px}.side-arrow.r{right:12px}
+.side-arrow:hover{transform:translateY(-50%) scale(1.06)}
+@media (max-width:820px){.side-arrow{display:none}}
+.credit{position:absolute;right:12px;top:30px;z-index:4;font-size:.62rem;color:rgba(255,255,255,.55);max-width:50%;text-align:right}
+.credit a{color:inherit}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;z-index:3000;background:rgba(5,6,10,.93);display:none;align-items:center;justify-content:center;flex-direction:column;padding:20px;cursor:zoom-out}
+.lightbox.open{display:flex;animation:fadein .25s ease}
+.lightbox img{max-width:min(1400px,96vw);max-height:80vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.lightbox p{color:#fff;margin:14px 0 0;text-align:center}
+.lightbox small{color:rgba(255,255,255,.6);font-size:.75rem}
+.lightbox small a{color:inherit}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+
+/* ---------- extras ---------- */
+.extras{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:22px}
+.extra{position:relative;border-radius:16px;overflow:hidden;min-height:240px;color:#fff;display:flex;align-items:flex-end;background:#222;box-shadow:var(--shadow)}
+.extra img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1s}
+.extra:hover img{transform:scale(1.07)}
+.extra:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 25%,rgba(0,0,0,.88))}
+.extra .in{position:relative;z-index:1;padding:16px}
+.extra h3{font-size:1.2rem;margin-bottom:4px}
+.extra p{margin:0;color:rgba(255,255,255,.85);font-size:.88rem}
+.extra.plain{background:linear-gradient(135deg,#1f4e79,#d7263d)}
+.extra.plain:after{background:none}
+
+/* ---------- hotels ---------- */
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 18px;align-items:center}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 13px;border-radius:99px;font:500 .88rem Inter,sans-serif;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.toolbar select{margin-left:auto;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 10px;border-radius:10px;font:inherit;font-size:.88rem}
+.hotel-layout{display:grid;grid-template-columns:1fr 420px;gap:18px;align-items:start}
+@media (max-width:960px){.hotel-layout{grid-template-columns:1fr}.mapbox{position:relative!important;top:0!important;order:-1}}
+.mapbox{position:sticky;top:70px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--surface)}
+#map{height:520px;background:var(--surface-2)}
+@media (max-width:960px){#map{height:340px}}
+.legend{display:flex;flex-wrap:wrap;gap:12px;padding:10px 14px;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.hotels{display:grid;gap:14px}
+.hotel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);transition:border-color .2s;cursor:pointer}
+.hotel:hover{border-color:var(--muted)}
+.hotel.active{border-color:var(--blue);outline:2px solid var(--blue-soft)}
+.hotel-head{display:flex;gap:12px;align-items:flex-start}
+.hotel h3{font-size:1.2rem}
+.hotel .addr{font-size:.85rem;color:var(--muted)}
+.score{margin-left:auto;text-align:right;flex:none}
+.score b{display:inline-block;background:var(--blue);color:var(--surface);font-weight:700;border-radius:8px 8px 8px 2px;padding:4px 8px}
+.score small{display:block;font-size:.72rem;color:var(--muted);margin-top:3px;max-width:150px}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.badge{font-size:.74rem;font-weight:600;padding:3px 9px;border-radius:99px;background:var(--surface-2);color:var(--ink)}
+.badge.top{background:var(--accent-soft);color:var(--accent)}
+.badge.green{background:var(--green-soft);color:var(--green)}
+.badge.gold{background:var(--gold-soft);color:var(--gold)}
+.hotel p{margin:6px 0;color:var(--muted);font-size:.93rem}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.metric{background:var(--surface-2);border-radius:10px;padding:8px 10px}
+.metric small{display:block;font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.metric b{font-size:.92rem}
+@media (max-width:480px){.metrics{grid-template-columns:1fr 1fr}.metric:last-child{grid-column:1/-1}}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.btn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font:600 .88rem Inter,sans-serif;padding:8px 13px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.fav[aria-pressed="true"]{background:var(--gold-soft);border-color:var(--gold);color:var(--gold)}
+.sharebar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.sharebar span{color:var(--muted);font-size:.9rem;margin-right:auto}
+
+/* ---------- race banner + info ---------- */
+.banner{position:relative;border-radius:22px;overflow:hidden;min-height:340px;display:flex;align-items:flex-end;color:#fff;margin-top:24px;background:#111}
+.banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.banner:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.8),rgba(0,0,0,.15))}
+.banner .in{position:relative;z-index:1;padding:28px;max-width:620px}
+.banner h3{font-size:clamp(1.8rem,4vw,3rem)}
+.banner p{color:rgba(255,255,255,.85);margin:8px 0 0}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:18px}
+.info .box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.info h3{font-size:1.05rem;margin-bottom:6px}
+.info ul{margin:0;padding-left:18px;color:var(--muted);font-size:.92rem}
+.info li{margin:4px 0}
+footer{padding:36px 0 60px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+footer a{color:var(--muted)}
+footer details{margin-top:12px}
+footer summary{cursor:pointer;font-weight:600;color:var(--ink)}
+footer ul{columns:2 320px;padding-left:18px;font-size:.78rem}
+.alt{background:var(--surface-2)}
+/* Anweg je Station */
+.way{display:flex;gap:10px;align-items:flex-start;max-width:540px;margin-bottom:14px;padding:9px 13px;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(10px);font-size:.84rem;line-height:1.4}
+.way .wi{font-size:1.2rem;line-height:1}
+.way b{color:#fff}
+.way small{display:block;color:rgba(255,255,255,.75);font-size:.78rem;margin-top:2px}
+/* Routen-Übersicht */
+.route{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:6px 4px}
+.route .st{display:inline-flex;gap:6px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:6px 12px;font-size:.84rem;font-weight:600;cursor:pointer;color:var(--ink)}
+.route .st small{color:var(--accent);font-weight:700}
+.route .st:hover{border-color:var(--muted)}
+.route .leg{font-size:.76rem;color:var(--muted);padding:0 4px;white-space:nowrap}
+.route .leg:before{content:"→ "}
+.route-sum{margin-top:12px;font-size:.88rem;color:var(--muted)}
+.maplibregl-map{font:inherit}
+.maplibregl-popup-content{color:#1c2230;font-size:.85rem;border-radius:10px;padding:10px 12px}
+/* story chrome below the fixed nav; room for side arrows */
+.progress{top:68px}
+.credit{top:80px}
+@media (min-width:821px){.slide .content{padding-left:84px}}
+.story:fullscreen .progress{top:14px}
+.story:fullscreen .credit{top:28px}
+.pin{width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4);display:grid;place-items:center}
+.pin span{transform:rotate(45deg);color:#fff;font:700 11px Inter,sans-serif}
+</style>
+</head>
+<body>
+
+<nav class="top" id="nav">
+  <div class="wrap">
+    <div class="brand">🇵🇱 Warschau ’27</div>
+    <div class="links">
+      <a href="#plan">Ablauf</a>
+      <a href="#samstag">Samstag</a>
+      <a href="#essen">Essen</a>
+      <a href="#hotels">Hotels</a>
+      <a href="#lauf">Lauf</a>
+      <a href="#infos">Infos</a>
+    </div>
+    <button class="theme-btn" id="themeBtn" title="Hell/Dunkel umschalten" aria-label="Hell/Dunkel umschalten">◐</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <img class="bg" data-img="night" data-w="2400" alt="Warschauer Skyline bei Nacht">
+  <div class="wrap">
+    <div class="eyebrow">12.–14. März 2027 · 4 Läufer · 1 Stadt</div>
+    <h1>Warschau.<br><em>21,1 km</em> &amp; ein<br>Wochenende voller Highlights.</h1>
+    <p class="sub">Freitag Pierogi und Wodka, Samstag Königsschloss, Kulturpalast und Altstadt, am Sonntag laufen wir über die Poniatowski-Brücke. Hier ist der Plan.</p>
+    <div class="countdown" id="countdown" aria-label="Countdown bis zum Start"></div>
+    <div class="facts">
+      <div class="fact"><small>Renntag</small><b>So, 14.03.2027</b><small>21. Półmaraton Warszawski</small></div>
+      <div class="fact"><small>Start (2026)</small><b>11:00 Uhr</b><small>Poniatowski-Brücke</small></div>
+      <div class="fact"><small>Expo (2026)</small><b>Fr + Sa</b><small>EXPO XXI, Wola</small></div>
+      <div class="fact"><small>Zimmer</small><b>2 × DZ</b><small>2 Nächte, Fr–So</small></div>
+      <div class="fact"><small>Anmeldung</small><b>ab 16.11.2026</b><small>neu bei den SuperHalfs</small></div>
+    </div>
+    <a class="scroll-hint" href="#plan"><span>↓</span> Entdecken</a>
+  </div>
+</header>
+
+<section id="plan">
+  <div class="wrap">
+    <div class="eyebrow reveal">Das Wochenende</div>
+    <h2 class="reveal">Drei Tage, ein Ziel</h2>
+    <p class="note reveal">ℹ️ Der Termin wurde von 4. April auf <b>14. März 2027</b> verlegt. Startzeit, Strecke und Expo-Ort für 2027 sind noch nicht offiziell. Die Angaben hier stammen von 2026. Bitte vor der Buchung auf <a href="https://polmaratonwarszawski.com/pl/" target="_blank" rel="noopener">polmaratonwarszawski.com</a> nachsehen.</p>
+    <div class="days">
+      <div class="day reveal"><img data-img="snowcastle" data-w="900" alt="" loading="lazy"><div class="in">
+        <span class="d">Freitag, 12.03.</span>
+        <h3>Ankommen &amp; Pierogi</h3>
+        <ul>
+          <li>Vom Flughafen Chopin mit der S-Bahn S2/S3 in ca. 25 Min. in die Stadt</li>
+          <li>Abends essen in der Altstadt, Tipps unter <a href="#essen" style="color:#fff">Essen</a></li>
+          <li>Optional: Startnummern schon am Freitag holen (2026 bis 21 Uhr)</li>
+        </ul></div></div>
+      <div class="day reveal"><img data-img="market" data-w="900" alt="" loading="lazy"><div class="in">
+        <span class="d">Samstag, 13.03.</span>
+        <h3>Expo &amp; Sightseeing</h3>
+        <ul>
+          <li>Vormittags Startnummern auf der Expo holen</li>
+          <li>Aufstandsmuseum, Kulturpalast, Königsweg und Altstadt</li>
+          <li>Früh zu Abend essen mit Kohlenhydraten, ab 22 Uhr Bettruhe</li>
+        </ul></div></div>
+      <div class="day race reveal"><img data-img="bridge" data-w="900" alt="" loading="lazy"><div class="in">
+        <span class="d">Sonntag, 14.03.</span>
+        <h3>Renntag 🏃</h3>
+        <ul>
+          <li>8:00 Frühstück, danach Gepäck im Hotel abgeben</li>
+          <li>11:00 Start an der Poniatowski-Brücke</li>
+          <li>Ziel am Nationalstadion, Medaille, Mittagessen und Heimreise</li>
+        </ul></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SAMSTAG STORY ===================== -->
+<section id="samstag" class="story-intro alt">
+  <div class="wrap">
+    <div class="eyebrow reveal">Samstag, 13. März</div>
+    <h2 class="reveal">Ein Tag. Neun Stationen. Jede Menge Warschau.</h2>
+    <p class="lead reveal">Wisch dich durch den Tag: Pfeile, Tastatur (← →) oder ▶ für die automatische Diashow. Mit ⛶ läuft sie im Vollbild. Tippe auf die kleinen Bilder, dann werden sie groß. Bei jeder Station steht, wie lange es von der vorherigen dauert und womit man fährt.</p>
+    <ol class="route reveal" id="routeDay" aria-label="Route des Tages"></ol>
+    <p class="route-sum reveal">👟 Insgesamt ca. <b>7–8 km zu Fuß</b>, verteilt über den Tag, mit Metro für die längeren Wege am Vormittag. Wer die Beine noch mehr schonen will, nimmt zwischen den Stationen öfter Taxi oder Bolt, eine Fahrt kostet im Zentrum meist 15–30 zł.</p>
+  </div>
+</section>
+<div class="story" id="storyDay" data-story="day" aria-roledescription="Bildergeschichte" aria-label="Samstagsprogramm"></div>
+
+<section class="alt" style="padding-top:40px">
+  <div class="wrap">
+    <h3 class="reveal" style="font-size:1.5rem">Noch Lust auf mehr? Statt oder zusätzlich:</h3>
+    <div class="extras">
+      <div class="extra reveal"><img data-img="lazienki" data-w="800" alt="" loading="lazy"><div class="in"><h3>🌳 Łazienki-Park</h3><p>Der Palast auf der Insel, Pfaue und das Chopin-Denkmal. Am Sonntag nach dem Lauf ideal zum Ausschütteln.</p></div></div>
+      <div class="extra reveal"><img data-img="kopernik" data-w="800" alt="" loading="lazy"><div class="in"><h3>🔬 Kopernikus-Zentrum</h3><p>Interaktives Wissenschaftsmuseum mit grünem Dach direkt an der Weichsel. Tickets online kaufen.</p></div></div>
+      <div class="extra reveal"><img data-img="neon" data-w="800" alt="" loading="lazy"><div class="in"><h3>💡 Neon-Museum, Praga</h3><p>Leuchtreklamen aus der Volksrepublik in einer alten Fabrikhalle, im Szeneviertel Praga.</p></div></div>
+      <div class="extra plain reveal"><div class="in"><h3>🕍 POLIN-Museum</h3><p>Preisgekröntes Museum über 1000 Jahre jüdische Geschichte in Polen. Auch die Architektur ist spektakulär. Für 2–3 Std. einplanen.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ESSEN STORY ===================== -->
+<section id="essen" class="story-intro">
+  <div class="wrap">
+    <div class="eyebrow reveal">Essen gehen</div>
+    <h2 class="reveal">Pierogi, Żurek &amp; Pączki: so schmeckt Warschau</h2>
+    <p class="lead reveal">Acht Adressen von der Milchbar bis zum modernen Feinschmecker-Lokal, mit den Gerichten, die man probieren muss. Für 4 Personen am Laufwochenende unbedingt <b>reservieren</b>. 1 € sind ungefähr 4,2–4,3 zł.</p>
+  </div>
+</section>
+<div class="story" id="storyFood" data-story="food" aria-roledescription="Bildergeschichte" aria-label="Restaurants"></div>
+
+<!-- ===================== HOTELS ===================== -->
+<section id="hotels" class="alt">
+  <div class="wrap">
+    <div class="eyebrow reveal">Unterkunft</div>
+    <h2 class="reveal">Hotelauswahl</h2>
+    <p class="lead reveal">Alle Hotels haben 3–4 Sterne, sehr gute Bewertungen und liegen zentral. Abends ist man schnell zu Fuß unterwegs, zum Start braucht man höchstens 30–35 Min. Die Buchungslinks führen zu Booking.com mit den Reisedaten und <b>Preisen in Euro</b>, für 4 Erwachsene in 2 Zimmern. Mit ☆ kannst du Favoriten markieren und sie an die Gruppe schicken.</p>
+
+    <div class="toolbar" role="group" aria-label="Filter">
+      <button class="chip" data-filter="all" aria-pressed="true">Alle</button>
+      <button class="chip" data-filter="breakfast" aria-pressed="false">Frühstück inklusive</button>
+      <button class="chip" data-filter="start" aria-pressed="false">Nah am Start</button>
+      <button class="chip" data-filter="oldtown" aria-pressed="false">Nah an der Altstadt</button>
+      <button class="chip" data-filter="budget" aria-pressed="false">Günstig</button>
+      <button class="chip" data-filter="fav" aria-pressed="false">☆ Favoriten</button>
+      <select id="sort" aria-label="Sortieren">
+        <option value="rec">Sortierung: Empfehlung</option>
+        <option value="price">Preis aufsteigend</option>
+        <option value="score">Bewertung</option>
+        <option value="start">Weg zum Start</option>
+      </select>
+    </div>
+
+    <div class="hotel-layout">
+      <div class="hotels" id="hotelList"></div>
+      <div class="mapbox">
+        <div id="map" role="region" aria-label="Karte mit Hotels, Sehenswürdigkeiten und Laufstrecke"></div>
+        <div class="legend">
+          <span><i style="background:#1f4e79"></i>Hotels</span>
+          <span><i style="background:#d7263d"></i>Start/Ziel/Expo</span>
+          <span><i style="background:#2e7d4f"></i>Sehenswürdigkeiten</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sharebar">
+      <span id="favCount">Noch keine Favoriten markiert.</span>
+      <a class="btn" id="shareWa" href="#" target="_blank" rel="noopener">📱 Per WhatsApp teilen</a>
+      <a class="btn" id="shareMail" href="#">✉️ Per Mail</a>
+      <button class="btn" id="copyFav">📋 Kopieren</button>
+    </div>
+    <p class="note">💶 Die <b>Preise sind grobe Richtwerte</b> pro Zimmer und Nacht für ein normales März-Wochenende. Am Laufwochenende mit über 20.000 Teilnehmern kann es teurer und schnell ausgebucht sein. Am besten <b>früh buchen, mit kostenloser Stornierung</b>. Bewertungen: Booking.com, Accor, Kayak bzw. Expedia, Stand Ende 2026.</p>
+  </div>
+</section>
+
+<!-- ===================== LAUF ===================== -->
+<section id="lauf">
+  <div class="wrap">
+    <div class="eyebrow reveal">Renntag, Sonntag 14. März</div>
+    <h2 class="reveal">Der Lauf</h2>
+    <div class="banner reveal"><img data-img="stadium" data-w="1600" alt="Nationalstadion PGE Narodowy von oben" loading="lazy">
+      <div class="in"><h3>Über die Brücke, ins Stadion.</h3><p>Start an der Poniatowski-Brücke über die Weichsel, Ziel am PGE Narodowy. Dazwischen 21,1 km durch die Stadt, mit über 20.000 Läufern.</p></div>
+    </div>
+    <div class="info">
+      <div class="box reveal"><h3>🏁 Start &amp; Ziel</h3><ul>
+        <li>Start 2026: <b>11:00 Uhr, Poniatowski-Brücke</b></li>
+        <li>Ziel 2025: Gelände am <b>PGE Narodowy</b></li>
+        <li>Metro M2: <b>Stadion Narodowy</b> bzw. <b>Centrum Nauki Kopernik</b></li>
+        <li>Startzeit und Strecke für 2027 noch abwarten</li>
+      </ul></div>
+      <div class="box reveal"><h3>🎽 Expo &amp; Startnummern</h3><ul>
+        <li>2026: <b>EXPO XXI</b>, ul. Prądzyńskiego 12/14 (Wola)</li>
+        <li>Fr 14–21 Uhr, Sa 10–20 Uhr. <b>Am Renntag gibt es keine Startnummern!</b></li>
+        <li>Mit der Straßenbahn oder ca. 15 Min. zu Fuß von der M2-Station Płocka</li>
+      </ul></div>
+      <div class="box reveal"><h3>⏰ Morgens am Renntag</h3><ul>
+        <li>Frühstück ca. 3 Std. vor dem Start</li>
+        <li>Am Vortag fragen, ob man das <b>Gepäck</b> abgeben oder später auschecken kann</li>
+        <li>Metro und Straßenbahn sind voll, deshalb <b>15 Min. Puffer</b> einplanen</li>
+        <li>Anmeldung startet am <b>16.11.2026</b>. Das Limit war 2026 schnell erreicht!</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="infos" class="alt">
+  <div class="wrap">
+    <div class="eyebrow reveal">Gut zu wissen</div>
+    <h2 class="reveal">Praktisches</h2>
+    <div class="info">
+      <div class="box reveal"><h3>🚇 Unterwegs</h3><ul>
+        <li>Metro (M1/M2), Straßenbahn und Bus, alles im ZTM-Tarif</li>
+        <li>Tickets in der App <b>Jakdojade</b> oder kontaktlos mit der Karte</li>
+        <li>Für das Wochenende lohnt ein 24- bzw. 72-Std.-Ticket oder das Wochenendticket</li>
+        <li>Flughafen Chopin ↔ Zentrum mit der S-Bahn S2/S3, ca. 25 Min.</li>
+        <li>Taxi: Bolt / Uber / FREE NOW sind günstig</li>
+      </ul></div>
+      <div class="box reveal"><h3>🌡️ Wetter Mitte März</h3><ul>
+        <li>Meist 0–8 °C, windig, Regen möglich</li>
+        <li>Warme Jacke für den Samstag</li>
+        <li>Für den Start alte Klamotten zum Wegwerfen oder einen Müllsack, dazu Mütze und Handschuhe</li>
+      </ul></div>
+      <div class="box reveal"><h3>💳 Geld &amp; Co.</h3><ul>
+        <li>Währung: Złoty (zł / PLN), Kartenzahlung fast überall</li>
+        <li>Beim Bezahlen <b>in Złoty</b> abrechnen lassen, nicht in Euro</li>
+        <li>Trinkgeld im Restaurant: ca. 10 %</li>
+        <li>Sonntags haben viele Geschäfte geschlossen</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Zusammengestellt im November 2026 als Vorschlag für unsere Gruppe. Alle Angaben ohne Gewähr. Quellen: <a href="https://polmaratonwarszawski.com/pl/" target="_blank" rel="noopener">polmaratonwarszawski.com</a>, <a href="https://bieganie.pl/lifestyle/polmaraton-warszawski-oglasza-nowa-date-i-dolaczenie-do-superhalfs/" target="_blank" rel="noopener">bieganie.pl</a>, Bewertungen von Booking.com, Accor, Kayak. Kartendaten © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-Mitwirkende, Karte: <a href="https://openfreemap.org" target="_blank" rel="noopener">OpenFreeMap</a> / <a href="https://openmaptiles.org" target="_blank" rel="noopener">OpenMapTiles</a>.
+    <details>
+      <summary>📷 Bildnachweise (Wikimedia Commons, für diese Seite verkleinert)</summary>
+      <ul id="credits"></ul>
+    </details>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Bildansicht">
+  <img alt="">
+  <p></p>
+  <small></small>
+</div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+(function(){
+  /* ================= helpers ================= */
+  const store = {
+    get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+    set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+  };
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  /* ================= images (Wikimedia Commons, freie Lizenzen) ================= */
+  const IMG = {
+    night:      ['Warsaw Night.jpg','Radek Kucharski','CC BY 2.0'],
+    panorama:   ['Stare Miasto- Warszawa-panorama.jpg','Userro12345','CC BY-SA 3.0 PL'],
+    bridge:     ['Most Poniatowskiego nocą.jpg','Łukasz Młodziński','CC BY-SA 3.0 PL'],
+    stadium:    ['National Stadium Warsaw aerial view 2.jpg','Arne Müseler','CC BY-SA 3.0 DE'],
+    uprising:   ['Muzeum Powstania Warszawskiego 2023.jpg','Adrian Grycuk','CC BY 3.0 PL'],
+    browary:    ['Browary Warszawskie.jpg','Piotr.Wassermann','CC BY-SA 4.0'],
+    browary3:   ['Browary Warszawskie3.jpg','Piotr.Wassermann','CC BY-SA 4.0'],
+    pkin:       ['Pałac Kultury i Nauki 24-05-2026.jpg','Maciurella','CC BY-SA 4.0'],
+    nowyswiat:  ['Nowy Swiat (22216).jpg','Rhododendrites','CC BY-SA 4.0'],
+    chopinbench:['Krakowskie Przedmieście (ławka Chopina).JPG','Mikołaj Węgier','CC BY-SA 2.5'],
+    holycross:  ['Bazylika Świętego Krzyża w Warszawie 2021.jpg','Adrian Grycuk','CC BY-SA 3.0 PL'],
+    blikle:     ['Blikle Warszawa.JPG','Piotrus (angenommen)','CC BY-SA 3.0'],
+    presidential:['Warszawa Pałac Prezydencki 2011.jpg','Marcin Białek','CC BY-SA 3.0'],
+    castlesq:   ['Castle Square (22346p).jpg','Rhododendrites','CC BY-SA 4.0'],
+    castle:     ['Royal Castle in Warsaw, Poland, 2022, 03.jpg','Chris Olszewski','CC BY-SA 4.0'],
+    column:     ['Kolumna Zygmunta III Wazy,Warszawa.jpg','Voyager747','CC BY 3.0'],
+    snowcastle: ['PL Warszawa, Stare Miasto, Zamek Królewski, w sniezynkach 1.jpg','Ivonna Nowicka','CC BY-SA 4.0'],
+    market:     ['Warsaw Old Town Market Square 10.JPG','Adrian Grycuk','CC BY-SA 3.0 PL'],
+    mermaid:    ['Siren Statue, Old Town, Warsaw.JPG','Paul Louis','CC BY-SA 3.0'],
+    barbican:   ['Barbakan w Warszawie - 03.jpg','Carlos Delgado','CC BY-SA 3.0 PL'],
+    newtown:    ['Rynek Nowego Miasta w Warszawie 2017.jpg','Adrian Grycuk','CC BY-SA 3.0 PL'],
+    lazienki:   ['Pałac Na Wyspie - widok od południa.jpg','Michał Serdyński','CC BY-SA 4.0'],
+    kopernik:   ['Warszawa Centrum Nauki Kopernik (dron).jpg','Kapitel','CC BY-SA 4.0'],
+    neon:       ['Neon Museum Warsaw 05.JPG','Adrian Grycuk','CC BY-SA 3.0 PL'],
+    koszyki:    ['Front facade of Hala Koszyki, Warsaw, Poland.jpg','Chris Olszewski','CC BY-SA 4.0'],
+    koszyki2:   ['Hala koszyki bar turecki.jpg','Panek','CC BY-SA 4.0'],
+    prasowy:    ['Bar Mleczny Prasowy w Warszawie.png','Artur Kuczmarski','CC BY-SA 4.0'],
+    pierogi:    ['Pierogi z masłem - 2023.03.31.jpg','Aw58','CC BY-SA 4.0'],
+    ruskie:     ['Pierogi ruskie 2.jpg','Kulawik.pl','CC BY-SA 4.0'],
+    ruskie2:    ['Pierogi ruskie, Gdansk.jpg','MOs810','CC BY-SA 4.0'],
+    zurek:      ['Zurek Sour Rye Soup, Warsaw.jpg','Ken Eckert','CC BY-SA 4.0'],
+    krupnik:    ['Krupnik zupa.jpg','Mariuszjbie','CC BY-SA 3.0'],
+    schabowy:   ['Kotlet Schabowy.jpg','Dmitry Dzema','CC BY-SA 4.0'],
+    tatar:      ['Classic steak tartare.jpg','insatiablemunch','CC BY 2.0'],
+    golabki:    ['Gołąbki - 2025.01.09.jpg','Aw58','CC BY 4.0'],
+    placki:     ['Potato pancakes.jpg','Daniel Spils','CC BY-SA 2.0'],
+    golonka:    ['Golonka Poznan.JPG','MOs810','CC BY-SA 4.0'],
+    bigos:      ['Bigos (1).jpg','Dr. Bernd Gross','CC BY-SA 4.0'],
+    paczki:     ['Polskie pączki.jpg','fir0002 / flagstaffotos','GFDL 1.2'],
+    barszcz:    ['Borscht served.jpg','liz west','CC BY 2.0'],
+  };
+  /* Bilder liegen lokal im Ordner img/: <key>.jpg (1600 px) und <key>-s.jpg (500 px, Vorschau) */
+  const src = (k, w=1600) => 'img/' + k + (w <= 600 ? '-s' : '') + '.jpg';
+  const page = k => 'https://commons.wikimedia.org/wiki/File:' + encodeURIComponent(IMG[k][0].replace(/ /g,'_'));
+  const creditLine = k => `Foto: <a href="${page(k)}" target="_blank" rel="noopener">${esc(IMG[k][1])}</a>, ${esc(IMG[k][2])}`;
+  document.querySelectorAll('img[data-img]').forEach(im => { im.src = src(im.dataset.img, +im.dataset.w || 1200); });
+  document.getElementById('credits').innerHTML = Object.keys(IMG).map(k =>
+    `<li><a href="${page(k)}" target="_blank" rel="noopener">${esc(IMG[k][0])}</a>: ${esc(IMG[k][1])}, ${esc(IMG[k][2])}</li>`).join('');
+
+  /* ================= theme + nav ================= */
+  const root = document.documentElement;
+  const savedTheme = store.get('waw-theme', null);
+  if (savedTheme) root.setAttribute('data-theme', savedTheme);
+  document.getElementById('themeBtn').addEventListener('click', () => {
+    const cur = root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next); store.set('waw-theme', next);
+  });
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('solid', scrollY > innerHeight * 0.6);
+  addEventListener('scroll', onScroll, { passive:true }); onScroll();
+
+  /* reveal on scroll */
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ================= countdown ================= */
+  const raceStart = new Date('2027-03-14T11:00:00+01:00');
+  const cdEl = document.getElementById('countdown');
+  function tick(){
+    let diff = Math.max(0, raceStart - new Date());
+    const d = Math.floor(diff/864e5); diff -= d*864e5;
+    const h = Math.floor(diff/36e5); diff -= h*36e5;
+    const m = Math.floor(diff/6e4);
+    cdEl.innerHTML = [[d,'Tage'],[h,'Std.'],[m,'Min.']].map(([v,l]) => `<div class="cd"><b>${v}</b><small>${l}</small></div>`).join('') +
+      `<div class="cd red"><b>21,1</b><small>km</small></div>`;
+  }
+  tick(); setInterval(tick, 30000);
+
+  /* ================= lightbox ================= */
+  const lb = document.getElementById('lightbox');
+  function openLB(k, title){
+    lb.querySelector('img').src = src(k, 2000);
+    lb.querySelector('img').alt = title || '';
+    lb.querySelector('p').textContent = title || '';
+    lb.querySelector('small').innerHTML = creditLine(k);
+    lb.classList.add('open');
+  }
+  lb.addEventListener('click', e => { if (!e.target.closest('a')) lb.classList.remove('open'); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+  document.addEventListener('click', e => {
+    const t = e.target.closest('[data-zoom]');
+    if (t){ e.preventDefault(); openLB(t.dataset.zoom, t.dataset.title); }
+  });
+
+  /* ================= maps links ================= */
+  const mapsUrl = q => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
+
+  /* ================= STORY DATA: Samstag ================= */
+  const daySlides = [
+    { cover:true, bg:'panorama', kicker:['Samstag','13. März 2027'],
+      title:'Ein Tag in Warschau',
+      tagline:'Von der Startnummer bis zur Altstadt bei Nacht: Wisch nach rechts und es geht los.',
+      toc:true },
+    { time:'10:00', place:'Wola · EXPO XXI', bg:'stadium', title:'Startnummer abholen', short:'Expo',
+      way:{ from:'Hotel (Zentrum)', icon:'🚇', main:'ca. 25 Min.', km:'3–4 km', text:'Metro M2 bis „Płocka“, dann ca. 10 Min. zu Fuß. Vom ibis Styles City aus 25 Min. zu Fuß oder 1 Station M2.' },
+      tagline:'Der Moment, in dem es ernst wird.',
+      desc:'Auf der Running-Expo gibt es Startnummer, Chip und das Starterpaket. Dazu Stände mit Laufschuhen, Gels und Schnäppchen. Früh hingehen, dann ist es noch leer. Das Foto zeigt das Nationalstadion, an dem wir morgen ins Ziel laufen.',
+      see:['<b>Startnummer &amp; Chip</b> abholen. Ausweis bzw. Bestätigung mitbringen','<b>Running-Expo</b> mit Marken, Messeangeboten und Streckenplan','Gemeinsames <b>Startnummern-Selfie</b> 📸'],
+      pills:[['Pflicht','hot'],['ca. 1 Std.'],['Sa ab 10 Uhr (2026)']],
+      thumbs:[['bridge','Morgen: Startbrücke']],
+      maps:'EXPO XXI Prądzyńskiego 12/14 Warszawa' },
+    { time:'11:30', place:'Wola · ul. Grzybowska 79', bg:'uprising', title:'Museum des Warschauer Aufstands', short:'Aufstandsmuseum',
+      way:{ from:'Expo', icon:'🚶', main:'ca. 20 Min.', km:'1,6 km', text:'Zu Fuß über die Kolejowa. Kürzer: M2 Płocka → Rondo Daszyńskiego (1 Station) plus 8 Min. zu Fuß, oder Taxi ca. 5 Min.' },
+      tagline:'63 Tage, die die Stadt geprägt haben.',
+      desc:'1944 erhob sich Warschau gegen die deutschen Besatzer. Danach wurde die Stadt fast vollständig zerstört. Das Museum in einem alten Straßenbahn-Kraftwerk erzählt das so eindringlich, dass man Warschau danach mit anderen Augen sieht. Das ist das Museum, das man gesehen haben sollte.',
+      see:['<b>„Stadt der Ruinen“</b>: 3D-Flug über das zerstörte Warschau 1945','Begehbarer <b>Nachbau eines Abwasserkanals</b>, durch den die Kämpfer flohen','Originalgetreue <b>Liberator-B-24</b> in Lebensgröße','<b>Aussichtsturm</b> und der Gedenkpark mit Namenswand'],
+      pills:[['Highlight','gold'],['1,5–2 Std.'],['Tickets online kaufen']],
+      maps:'Muzeum Powstania Warszawskiego' },
+    { time:'13:30', place:'Wola · Browary Warszawskie', bg:'browary3', title:'Mittag in der alten Brauerei', short:'Browary',
+      way:{ from:'Aufstandsmuseum', icon:'🚶', main:'ca. 7 Min.', km:'500 m', text:'Einfach die Grzybowska Richtung Zentrum entlang.' },
+      tagline:'Backstein, Stahl und Streetfood.',
+      desc:'Auf dem Gelände der früheren Haberbusch-Brauerei ist eines der coolsten neuen Viertel der Stadt entstanden. In der Food Hall findet jeder etwas, von Ramen bis Pierogi. Danach geht es mit der Straßenbahn ins Zentrum.',
+      see:['<b>Food Hall</b> mit Dutzenden Ständen, alle zahlen getrennt','Industrie-Architektur trifft Glasfassaden','5 Gehminuten vom Aufstandsmuseum'],
+      pills:[['ca. 1 Std.'],['€–€€']],
+      thumbs:[['browary','Browary von außen']],
+      maps:'Browary Warszawskie Hala Gastronomiczna' },
+    { time:'14:30', place:'Śródmieście · Plac Defilad', bg:'pkin', title:'Kulturpalast', short:'Kulturpalast',
+      way:{ from:'Browary', icon:'🚇', main:'ca. 15 Min.', km:'1,8 km', text:'8 Min. zu Fuß zur M2 „Rondo ONZ“, 1 Station bis „Świętokrzyska“, dann 5 Min. zu Fuß. Komplett zu Fuß: ca. 25 Min.' },
+      tagline:'Stalins „Geschenk“ und heute das Wahrzeichen der Stadt.',
+      desc:'237 Meter hoch mit Spitze, 1955 fertiggestellt, über 3.000 Räume. Die Warschauer lieben und hassen ihn zugleich. Von der Aussichtsterrasse im 30. Stock sieht man die ganze Stadt, die Weichsel und die Brücke, über die wir morgen laufen.',
+      see:['<b>Aussichtsterrasse im 30. Stock</b>, ca. 114 m hoch','Sozialistischer Klassizismus mit Renaissance-Details','Rundherum die neue Skyline mit Wolkenkratzern'],
+      pills:[['Highlight','gold'],['45 Min.'],['Ticket an der Kasse']],
+      thumbs:[['night','Skyline bei Nacht']],
+      maps:'Taras widokowy PKiN Warszawa' },
+    { time:'15:30', place:'Nowy Świat → Krakowskie Przedmieście', bg:'nowyswiat', title:'Der Königsweg', short:'Königsweg',
+      way:{ from:'Kulturpalast', icon:'🚶', main:'ca. 15 Min.', km:'1,3 km', text:'Über die Al. Jerozolimskie zum Rondo de Gaulle’a mit der berühmten Palme, dort beginnt der Nowy Świat. Der Königsweg selbst ist ca. 2,4 km lang und endet am Schlossplatz.' },
+      tagline:'Die schönste Flaniermeile Warschaus.',
+      desc:'Vom Nowy Świat über das Krakowskie Przedmieście zum Schloss: Paläste, Kirchen, Cafés und die Universität. Hier sollte man langsam gehen und oft stehen bleiben. Ein Kaffee mit Pączek (gefüllter Krapfen) bei Blikle gehört dazu, die Konditorei gibt es seit 1869.',
+      see:['<b>Chopin-Bänke</b>: Knopf drücken, dann spielt die Bank Chopin','<b>Heilig-Kreuz-Kirche</b>, in einer Säule ist Chopins Herz eingemauert','<b>Präsidentenpalast</b>, das Kopernikus-Denkmal und die Universität','<b>Pączki bei Blikle</b> als süße Pause'],
+      pills:[['Highlight','gold'],['ca. 1,5 km'],['1 Std. mit Pausen']],
+      thumbs:[['chopinbench','Chopin-Bank'],['holycross','Heilig-Kreuz-Kirche'],['presidential','Präsidentenpalast'],['blikle','Café Blikle']],
+      maps:'Nowy Świat Warszawa' },
+    { time:'16:45', place:'Stare Miasto · Plac Zamkowy', bg:'castlesq', title:'Schlossplatz &amp; Königsschloss', short:'Schlossplatz',
+      way:{ from:'Königsweg', icon:'🚶', main:'direkt am Ende', km:'', text:'Der Königsweg endet direkt hier. Am Ende des Krakowskie Przedmieście öffnet sich der Platz.' },
+      tagline:'Der Treffpunkt von ganz Warschau.',
+      desc:'Hier ist der große Moment: Der Königsweg öffnet sich zum Schlossplatz mit dem roten Königsschloss und der Sigismundsäule. Das Schloss wurde nach 1944 Stein für Stein wieder aufgebaut. Samstags ist es bis ca. 18 Uhr offen, für einen kurzen Blick in die Prunksäle.',
+      see:['<b>Sigismundsäule</b> (1644), das älteste weltliche Denkmal der Stadt','<b>Königsschloss</b> mit Thronsaal und Canaletto-Saal','Im März oft noch mit <b>Lichterdekoration</b>'],
+      pills:[['30–60 Min.'],['Schloss: Ticket nötig']],
+      thumbs:[['column','Sigismundsäule'],['castle','Königsschloss'],['snowcastle','Winterlichter']],
+      maps:'Zamek Królewski w Warszawie' },
+    { time:'17:15', place:'Stare Miasto · UNESCO-Welterbe', bg:'market', title:'Altstadt, Barbakan &amp; Neustadt', short:'Altstadt',
+      way:{ from:'Schlossplatz', icon:'🚶', main:'ca. 5 Min.', km:'300 m', text:'Durch die Świętojańska zum Altstadtmarkt. Die Runde Markt → Barbakane → Neustadtmarkt und zurück ist ca. 1,2 km lang.' },
+      tagline:'Ein Wunder aus Trümmern.',
+      desc:'Kaum zu glauben, dass das alles 1945 ein Trümmerfeld war. Beim Wiederaufbau halfen alte Gemälde von Canaletto als Vorlage. Heute ist die Altstadt UNESCO-Welterbe. In der Dämmerung, wenn die Laternen angehen, ist sie am schönsten.',
+      see:['<b>Altstadtmarkt</b> mit der Meerjungfrau <b>Syrenka</b>, dem Wappentier Warschaus','Die <b>Barbakane</b>, eine Wehranlage aus rotem Backstein','Dahinter der ruhige <b>Neustadtmarkt</b>','Gassen wie die <b>Kanonia</b> mit der schmalsten Hausfassade der Stadt'],
+      pills:[['Highlight','gold'],['1 Std.'],['Bei Dämmerung am schönsten']],
+      thumbs:[['mermaid','Syrenka'],['barbican','Barbakane'],['newtown','Neustadtmarkt']],
+      maps:'Rynek Starego Miasta Warszawa' },
+    { time:'18:30', place:'Altstadt oder Hala Koszyki', bg:'ruskie', title:'Pasta-Party auf Polnisch', short:'Abendessen',
+      way:{ from:'Altstadt', icon:'🚶', main:'2–5 Min.', km:'', text:'Zapiecek und Polka liegen direkt in der Altstadt. Zur Hala Koszyki (ca. 3 km): Taxi/Bolt ca. 12 Min. für ca. 30 zł.' },
+      tagline:'Pierogi sind die besten Kohlenhydrate der Welt.',
+      desc:'Früh essen, viele Kohlenhydrate, wenig Alkohol: Pierogi ruskie mit Kartoffeln und Quark, dazu eine Żurek, die Sauerteigsuppe. Danach mit der Tram zurück ins Hotel und um 22 Uhr ins Bett.',
+      see:['<b>Pierogi</b> bei Zapiecek oder Gościniec','Oder Pasta in der <b>Hala Koszyki</b>','Startklamotten rauslegen, Wecker stellen 🛌'],
+      pills:[['Carbo-Loading','hot'],['spätestens 19 Uhr essen']],
+      thumbs:[['zurek','Żurek'],['pierogi','Pierogi']],
+      cta:['Zu den Restaurants ↓','#essen'] },
+    { cover:true, bg:'bridge', kicker:['Sonntag','14. März 2027 · 11:00 Uhr'],
+      title:'Gute Nacht, Warschau.',
+      tagline:'Morgen laufen wir genau hier: 21,1 km, über die Poniatowski-Brücke und bis ins Ziel am Nationalstadion.',
+      way:{ from:'Abendessen ins Hotel', icon:'🚋', main:'ca. 15–20 Min.', km:'', text:'Mit Tram, Bus oder Metro zurück ins Hotel. Bolt/Uber braucht ca. 10 Min. Heute Abend nicht mehr unnötig laufen!' },
+      cta:['Zum Renntag ↓','#lauf'] },
+  ];
+
+  /* ================= STORY DATA: Essen ================= */
+  const foodSlides = [
+    { cover:true, bg:'pierogi', kicker:['Essen gehen','8 Adressen'],
+      title:'So schmeckt Warschau',
+      tagline:'Herzhaft, ehrlich und günstiger als zu Hause. Die Milchbar gehört genauso dazu wie das feine Lokal.',
+      toc:true },
+    { place:'Altstadt · Świętojańska 13 & Freta', bg:'ruskie2', title:'Zapiecek', when:'Freitag', price:'€',
+      tagline:'Der Pierogi-Klassiker, rustikal und urgemütlich.',
+      desc:'Holzbänke, Kerzenlicht und Kellnerinnen in Tracht. Zapiecek ist touristisch, aber eine Institution und hat mehrere Filialen am Königsweg und in der Altstadt. Die Filiale in der Świętojańska ist meist weniger voll.',
+      dishes:[['ruskie','Pierogi ruskie','Kartoffel-Quark-Füllung mit Röstzwiebeln, der Klassiker'],['barszcz','Barszcz czerwony','Rote-Bete-Suppe, klar oder cremig']],
+      pills:[['Pierogi'],['Gruppe: reservieren']],
+      maps:'Zapiecek Świętojańska 13 Warszawa' },
+    { place:'Altstadt · Świętojańska 2', bg:'snowcastle', title:'Restauracja Polka', when:'Freitag', price:'€€',
+      tagline:'Traditionelle polnische Küche, ein paar Schritte vom Schloss.',
+      desc:'Ein gemütliches Restaurant mit altpolnischem Charme direkt neben dem Schlossplatz. Gut, wenn man gleich am ersten Abend die Klassiker der polnischen Küche probieren will. Sonntags schließt es früher.',
+      dishes:[['zurek','Żurek','Saure Roggenmehlsuppe mit Wurst und Ei, oft im Brotlaib'],['krupnik','Krupnik','Kräftige Graupensuppe, perfekt nach einem kalten Tag']],
+      pills:[['Polnisch klassisch'],['Reservieren!','hot']],
+      maps:'Restauracja Polka Świętojańska 2 Warszawa' },
+    { place:'Mehrere Filialen im Zentrum', bg:'pierogi', title:'Gościniec Polskie Pierogi', when:'Fr oder Sa', price:'€',
+      tagline:'Riesige Pierogi-Auswahl zu kleinen Preisen.',
+      desc:'Eine kleine Warschauer Kette mit über 20.000 sehr guten Bewertungen. Hier gibt es Dutzende Füllungen, von Fleisch über Sauerkraut mit Pilzen bis süß mit Beeren. Ideal für das Carbo-Loading am Samstagabend.',
+      dishes:[['placki','Placki ziemniaczane','Kartoffelpuffer, gern mit Gulasch'],['golabki','Gołąbki','Kohlrouladen in Tomatensoße']],
+      pills:[['Carbo-Loading','gold'],['schnell &amp; günstig']],
+      maps:'Gościniec Polskie Pierogi Warszawa' },
+    { place:'Powiśle · am Weichselufer', bg:'bridge', title:'Bez Gwiazdek', when:'Freitag (feiner)', price:'€€€',
+      tagline:'„Ohne Sterne“, aber auf Sterne-Niveau.',
+      desc:'Junge, moderne polnische Küche: Jeden Monat steht eine andere Region Polens im Mittelpunkt, mit Tasting-Menü oder à la carte. Die Rinderbacke ist ein Klassiker. Wer am Freitag einmal richtig gut essen will, ist hier richtig. Unbedingt reservieren.',
+      dishes:[['tatar','Tatar','Polnisches Beef Tatar mit Eigelb und Pickles'],['paczki','Dessert','Wechselnde Süßspeise aus der Region des Monats']],
+      pills:[['Modern polnisch'],['Reservieren!','hot']],
+      maps:'Bez Gwiazdek Wybrzeże Kościuszkowskie 31 Warszawa' },
+    { place:'Mokotów · ul. Puławska 104/106', bg:'bigos', title:'Stary Dom', when:'Freitag (feiner)', price:'€€€',
+      tagline:'Hier gehen die Warschauer selbst hin.',
+      desc:'Ein Klassiker seit Jahrzehnten: holzvertäfelte Stuben, große Portionen und polnische Küche, wie sie sein soll. Liegt etwas außerhalb, mit Straßenbahn bzw. Metro ca. 15 Min. vom Zentrum. Die Fahrt lohnt sich.',
+      dishes:[['golonka','Golonka','Geschmorte Schweinshaxe mit Meerrettich'],['schabowy','Kotlet schabowy','Das polnische Schnitzel mit Kartoffeln und Krautsalat']],
+      pills:[['Polnischer Klassiker'],['Reservieren!','hot']],
+      maps:'Stary Dom Puławska 104/106 Warszawa' },
+    { place:'Śródmieście · Koszykowa 63', bg:'koszyki', title:'Hala Koszyki', when:'Samstag', price:'€–€€',
+      tagline:'Eine Jugendstil-Markthalle als Treffpunkt der Stadt.',
+      desc:'Die restaurierte Markthalle von 1909 ist heute voller Restaurants und Bars: italienisch, polnisch, asiatisch, Wein- und Cocktailbars. Jeder isst, was er will, und es gibt genug Pasta zum Carbo-Loading. Man kann nicht reservieren, abends ist es voll.',
+      dishes:[['koszyki2','Die Halle','Stahl, Glas und lange Tische unter einem Dach'],['ruskie','Pasta oder Pierogi','Je nach Stand: Pasta, Pizza, Pierogi oder Ramen']],
+      pills:[['Food Hall'],['ohne Reservierung']],
+      maps:'Hala Koszyki Koszykowa 63 Warszawa' },
+    { place:'Śródmieście · Marszałkowska 10/16', bg:'prasowy', title:'Bar Mleczny Prasowy', when:'Mittag', price:'€',
+      tagline:'Eine Zeitreise in die Volksrepublik, für ca. 5 €.',
+      desc:'„Milchbars“ waren die Kantinen des Sozialismus. Die Prasowy gibt es seit 1954, mit Tabletts, Bestellung am Tresen und kleinen Preisen. Einfach, ehrlich und sehr lecker. Das muss man einmal erlebt haben.',
+      dishes:[['placki','Placki','Kartoffelpuffer mit Schmand'],['krupnik','Zupa dnia','Die Tagessuppe für ein paar Złoty']],
+      pills:[['Kult'],['sehr günstig','gold']],
+      maps:'Bar Prasowy Marszałkowska 10/16 Warszawa' },
+    { place:'Nowy Świat 35', bg:'blikle', title:'Café Blikle', when:'Samstag Nachmittag', price:'€',
+      tagline:'Die berühmtesten Pączki Polens, seit 1869.',
+      desc:'Am Königsweg führt kein Weg an Blikle vorbei. Der Pączek ist ein gefüllter Krapfen mit Rosenmarmelade und Orangenschale. Wer den Kalorien vor dem Rennen nicht traut: Nach dem Lauf schmecken sie doppelt gut.',
+      dishes:[['paczki','Pączek','Krapfen mit Rosenkonfitüre, ein Klassiker'],['blikle','Das Café','Traditionsreiches Kaffeehaus am Nowy Świat']],
+      pills:[['Süß'],['Kaffeepause']],
+      maps:'Blikle Nowy Świat 35 Warszawa' },
+  ];
+
+  /* ================= STORY ENGINE ================= */
+  function buildStory(el, slides, opts){
+    const n = slides.length;
+    const slideHTML = (s, i) => {
+      const num = String(i).padStart(2,'0');
+      const kicker = s.cover ? s.kicker.map(esc).join('<span class="dot"></span>')
+        : [s.time, s.place, s.when ? 'Ideal: ' + s.when : null, s.price].filter(Boolean).map(x => x).join('<span class="dot"></span>');
+      let d = 0; const nd = () => `style="--d:${d++}"`;
+      let html = `<article class="slide${s.cover?' cover':''}" aria-label="${i+1} von ${n}">
+        <img class="bg" ${i<2?'':'loading="lazy"'} src="${src(s.bg, 1920)}" alt="">
+        <div class="shade"></div>
+        ${!s.cover ? `<div class="bignum" aria-hidden="true">${num}</div>` : ''}
+        <div class="credit">${creditLine(s.bg)}</div>
+        <div class="content">
+          ${s.way ? `<div class="way a" ${nd()}><span class="wi">${s.way.icon}</span><span><b>Von ${s.way.from}: ${s.way.main}</b>${s.way.km ? ` · ${s.way.km}` : ''}<small>${s.way.text}</small></span></div>` : ''}
+          <div class="kicker a" ${nd()}>${kicker}</div>
+          <h3 class="a" ${nd()}>${s.title}</h3>
+          <p class="tagline a" ${nd()}>${s.tagline}</p>`;
+      if (s.desc) html += `<p class="desc a" ${nd()}>${s.desc}</p>`;
+      if (s.pills) html += `<div class="pills a" ${nd()}>${s.pills.map(([t,c]) => `<span class="pill ${c||''}">${t}</span>`).join('')}</div>`;
+      if (s.dishes) html += `<div class="dishes a" ${nd()}>${s.dishes.map(([k,t,sub]) => `<button class="dishcard" data-zoom="${k}" data-title="${esc(t)}"><img loading="lazy" src="${src(k,600)}" alt="${esc(t)}"><div><b>${t}</b><small>${sub}</small></div></button>`).join('')}</div>`;
+      if (s.see) html += `<ul class="see a" ${nd()}>${s.see.map(x => `<li><span>${x}</span></li>`).join('')}</ul>`;
+      if (s.thumbs) html += `<div class="thumbs a" ${nd()}>${s.thumbs.map(([k,t]) => `<button class="thumb" data-zoom="${k}" data-title="${esc(t)}"><img loading="lazy" src="${src(k,400)}" alt="${esc(t)}"><span>${t}</span></button>`).join('')}</div>`;
+      if (s.toc) html += `<div class="swipehint a" ${nd()}>Wischen oder klicken <i>→</i></div>
+          <div class="toc a" ${nd()}>${slides.map((x,j) => (!x.cover) ? `<button data-go="${j}">${x.time ? x.time + ' ' : ''}${x.title}</button>` : '').join('')}</div>`;
+      const btns = [];
+      if (s.maps) btns.push(`<a class="sbtn" href="${mapsUrl(s.maps)}" target="_blank" rel="noopener">📍 Google Maps${opts.food ? ' · Fotos &amp; Karte' : ''}</a>`);
+      if (s.cta) btns.push(`<a class="sbtn primary" href="${s.cta[1]}">${s.cta[0]}</a>`);
+      if (btns.length) html += `<div class="sbtns a" ${nd()}>${btns.join('')}</div>`;
+      return html + `</div></article>`;
+    };
+    el.innerHTML = `
+      <div class="progress">${slides.map((_,i) => `<button aria-label="Folie ${i+1}" data-go="${i}"><i></i></button>`).join('')}</div>
+      <div class="track" tabindex="0">${slides.map(slideHTML).join('')}</div>
+      <button class="round side-arrow l" data-prev aria-label="Zurück">←</button>
+      <button class="round side-arrow r" data-next aria-label="Weiter">→</button>
+      <div class="bar">
+        <div class="counter"><b data-cur>1</b> / ${n}</div>
+        <button class="round small" data-play aria-label="Automatisch abspielen" title="Diashow">▶</button>
+        <button class="round small" data-fs aria-label="Vollbild" title="Vollbild">⛶</button>
+        <button class="round small" data-prev aria-label="Zurück">←</button>
+        <button class="round small" data-next aria-label="Weiter">→</button>
+      </div>`;
+    const track = el.querySelector('.track');
+    const slideEls = [...el.querySelectorAll('.slide')];
+    const segs = [...el.querySelectorAll('.progress button')];
+    let cur = -1, timer = null;
+    const DUR = 9000;
+    el.style.setProperty('--dur', DUR + 'ms');
+
+    function setActive(i){
+      if (i === cur) return;
+      cur = i;
+      slideEls.forEach((s,j) => s.classList.toggle('active', j === i));
+      segs.forEach((b,j) => { b.classList.toggle('seen', j < i); b.classList.toggle('cur', j === i); });
+      // restart progress animation
+      segs[i].querySelector('i').style.animation = 'none'; void segs[i].offsetWidth; segs[i].querySelector('i').style.animation = '';
+      el.querySelector('[data-cur]').textContent = i + 1;
+      el.querySelectorAll('[data-prev]').forEach(b => b.disabled = i === 0);
+      el.querySelectorAll('[data-next]').forEach(b => b.disabled = i === n - 1 && !timer);
+      if (timer){ clearTimeout(timer); timer = setTimeout(autoNext, DUR); }
+    }
+    function go(i){
+      i = Math.max(0, Math.min(n - 1, i));
+      track.scrollTo({ left: i * track.clientWidth, behavior:'smooth' });
+      setActive(i);
+    }
+    function autoNext(){ if (cur >= n - 1) { stop(); return; } go(cur + 1); }
+    function play(){ el.classList.add('playing'); el.querySelector('[data-play]').textContent = '❚❚'; timer = setTimeout(autoNext, DUR); segs[cur].querySelector('i').style.animation='none'; void segs[cur].offsetWidth; segs[cur].querySelector('i').style.animation=''; }
+    function stop(){ el.classList.remove('playing'); el.querySelector('[data-play]').textContent = '▶'; clearTimeout(timer); timer = null; }
+
+    let raf;
+    track.addEventListener('scroll', () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => setActive(Math.round(track.scrollLeft / track.clientWidth)));
+    }, { passive:true });
+    el.addEventListener('click', e => {
+      const g = e.target.closest('[data-go]'); if (g){ go(+g.dataset.go); return; }
+      if (e.target.closest('[data-prev]')) { stop(); go(cur - 1); }
+      if (e.target.closest('[data-next]')) { stop(); go(cur + 1); }
+      if (e.target.closest('[data-play]')) { timer ? stop() : (cur >= n-1 ? (go(0), play()) : play()); }
+      if (e.target.closest('[data-fs]')) {
+        if (document.fullscreenElement) document.exitFullscreen();
+        else if (el.requestFullscreen) el.requestFullscreen().catch(()=>{});
+      }
+    });
+    el.addEventListener('pointerdown', e => { if (timer && e.target.closest('.track')) stop(); });
+    addEventListener('resize', () => track.scrollTo({ left: cur * track.clientWidth }));
+    document.addEventListener('fullscreenchange', () => setTimeout(() => track.scrollTo({ left: cur * track.clientWidth }), 60));
+    // keyboard when story mostly visible
+    let visible = false;
+    new IntersectionObserver(es => es.forEach(e => {
+      visible = e.intersectionRatio > .55;
+      if (!e.isIntersecting && timer) stop();
+    }), { threshold:[0,.55,1] }).observe(el);
+    addEventListener('keydown', e => {
+      if (!visible || lb.classList.contains('open')) return;
+      if (e.key === 'ArrowRight'){ e.preventDefault(); stop(); go(cur + 1); }
+      if (e.key === 'ArrowLeft'){ e.preventDefault(); stop(); go(cur - 1); }
+    });
+    setActive(0);
+  }
+  buildStory(document.getElementById('storyDay'), daySlides, {});
+
+  /* Routen-Übersicht über der Samstags-Story */
+  const routeEl = document.getElementById('routeDay');
+  routeEl.innerHTML = '<li><span class="st" style="cursor:default">🏨 Hotel</span></li>' + daySlides.map((s,i) => {
+    if (!s.short) return '';
+    return `<li class="leg">${s.way.icon} ${s.way.main}${s.way.km ? ' · ' + s.way.km : ''}</li><li><span class="st" data-route="${i}"><small>${s.time}</small>${s.short}</span></li>`;
+  }).join('') + `<li class="leg">${daySlides[daySlides.length-1].way.icon} ${daySlides[daySlides.length-1].way.main}</li><li><span class="st" style="cursor:default">🏨 Hotel</span></li>`;
+  routeEl.addEventListener('click', e => {
+    const st = e.target.closest('[data-route]'); if (!st) return;
+    const story = document.getElementById('storyDay');
+    story.scrollIntoView({ behavior:'smooth' });
+    setTimeout(() => story.querySelector(`.progress [data-go="${st.dataset.route}"]`).click(), 500);
+  });
+  buildStory(document.getElementById('storyFood'), foodSlides, { food:true });
+
+  /* ================= HOTELS ================= */
+  const CHECKIN = '2027-03-12', CHECKOUT = '2027-03-14';
+  const bookingUrl = name => 'https://www.booking.com/searchresults.de.html?' + new URLSearchParams({
+    ss: name + ', Warschau', checkin: CHECKIN, checkout: CHECKOUT,
+    group_adults: 4, no_rooms: 2, group_children: 0, selected_currency: 'EUR', lang: 'de'
+  }).toString();
+
+  const hotels = [
+    { id:'puro', name:'PURO Warszawa Centrum', stars:4, addr:'ul. Widok 9 · Śródmieście', lat:52.2327, lng:21.0125,
+      score:9.5, scoreSrc:'Booking.com', price:[100,150], breakfast:false, rec:1,
+      tags:['top','oldtown','start'], label:'Unser Favorit',
+      text:'Modernes Designhotel mitten im Zentrum, top Bewertungen. Nowy Świat, Kulturpalast und Hala Koszyki sind zu Fuß erreichbar, bis zur Altstadt sind es ca. 20 Min.',
+      toStart:'ca. 20 Min. zu Fuß', startMin:20, toOld:'20 Min. zu Fuß' },
+    { id:'isc', name:'ibis Styles Warszawa City', stars:3, addr:'ul. Grzybowska 43 · Wola', lat:52.2360, lng:20.9902,
+      score:9.1, scoreSrc:'Kayak, 5.000+ Bewertungen', price:[75,110], breakfast:true, rec:2,
+      tags:['budget','breakfast'], label:'Preis-Leistungs-Tipp',
+      text:'Genau die gewünschte Ibis-Styles-Klasse, sehr beliebt, Frühstück inklusive. Liegt praktisch zwischen <b>Expo</b>, Aufstandsmuseum und Browary Warszawskie, das Zentrum ist mit Metro bzw. Straßenbahn nah.',
+      toStart:'ca. 25–30 Min. (M2 ab Rondo ONZ)', startMin:28, toOld:'15 Min. mit der Tram' },
+    { id:'iscen', name:'ibis Styles Warszawa Centrum', stars:3, addr:'ul. Zagórna 1a · Powiśle/Solec', lat:52.2265, lng:21.0420,
+      score:9.0, scoreSrc:'Kayak · 4,7/5 Accor', price:[75,110], breakfast:true, rec:3,
+      tags:['start','breakfast','budget'], label:'Am nächsten zum Start',
+      text:'Ibis Styles mit Frühstück und sehr guten Bewertungen. Es ist das Hotel, das am nächsten an Start und Ziel liegt. Nach dem Lauf ist man schnell zurück. Die Altstadt ist dafür etwas weiter weg.',
+      toStart:'ca. 15–20 Min. zu Fuß', startMin:17, toOld:'20 Min. mit Bus/Tram' },
+    { id:'hampton', name:'Hampton by Hilton Warsaw City Centre', stars:3, addr:'ul. Wspólna 72 · Śródmieście', lat:52.2275, lng:21.0075,
+      score:8.8, scoreSrc:'Kayak, 10.000+ Bewertungen', price:[85,125], breakfast:true, rec:4,
+      tags:['breakfast'],
+      text:'Zuverlässige Kette mit Frühstück inklusive, direkt beim Hauptbahnhof (Warszawa Centralna). Gut erreichbar mit S-Bahn vom Flughafen, der Kulturpalast ist um die Ecke.',
+      toStart:'ca. 25 Min. (zu Fuß oder Tram + Fußweg)', startMin:25, toOld:'25 Min. zu Fuß' },
+    { id:'novotel', name:'Novotel Warszawa Centrum', stars:4, addr:'ul. Marszałkowska 94/98 · Śródmieście', lat:52.2290, lng:21.0118,
+      score:9.2, scoreSrc:'Accor 4,6/5 (umgerechnet), 5.300 Bew.', price:[90,140], breakfast:false, rec:5,
+      tags:[],
+      text:'Großes Hotel im Hochhaus am Rondo Dmowskiego, also genau im Zentrum. Viele Zimmer mit Blick auf die Stadt, Straßenbahn und Metro vor der Tür, Frühstücksbuffet gegen Aufpreis.',
+      toStart:'ca. 20 Min. zu Fuß', startMin:20, toOld:'20 Min. Tram/zu Fuß' },
+    { id:'indigo', name:'Hotel Indigo Warsaw Nowy Świat', stars:4, addr:'ul. Smolna 40 · Nowy Świat', lat:52.2321, lng:21.0236,
+      score:9.0, scoreSrc:'Booking.com (wenige Bew.)', price:[140,220], breakfast:false, rec:6,
+      tags:['start','oldtown','top'], label:'Upgrade-Option',
+      text:'Boutique-Hotel in einem Gründerzeitbau direkt am Königsweg. Die Lage ist für beides ideal: Abends in 10 Min. an Nowy Świat, sonntags in ca. 10 Min. zu Fuß an der Brücke. Dafür ist es deutlich teurer.',
+      toStart:'ca. 10 Min. zu Fuß', startMin:10, toOld:'15 Min. zu Fuß' },
+    { id:'mercure', name:'Mercure Warszawa Centrum', stars:4, addr:'ul. Złota 48/54 · Śródmieście', lat:52.2312, lng:21.0032,
+      score:8.6, scoreSrc:'Kayak, 5.500 Bewertungen', price:[85,130], breakfast:false, rec:7,
+      tags:[],
+      text:'Solides 4-Sterne-Haus neben dem Kulturpalast und den Złote Tarasy. Nur wenige Schritte zur M2 (Świętokrzyska), ab dort sind es 2 Stationen zum Stadion.',
+      toStart:'ca. 20 Min. (M2)', startMin:20, toOld:'20 Min. zu Fuß' },
+    { id:'ibisso', name:'ibis Warszawa Stare Miasto', stars:2, addr:'ul. Muranowska 2 · Muranów', lat:52.2531, lng:21.0040,
+      score:8.7, scoreSrc:'Expedia, ~1.000 Bewertungen', price:[60,90], breakfast:false, rec:8,
+      tags:['oldtown','budget'],
+      text:'Günstigste Option, dafür nur ca. 10 Min. zu Fuß zur Altstadt und zum POLIN-Museum. Ein einfaches Standard-ibis, kein „Styles“. Der Weg zum Start ist am längsten.',
+      toStart:'ca. 30–35 Min. (Tram/Metro)', startMin:33, toOld:'10 Min. zu Fuß' },
+  ];
+
+  const race = [
+    { name:'Start: Poniatowski-Brücke', lat:52.2335, lng:21.0430, icon:'S' },
+    { name:'Ziel: PGE Narodowy', lat:52.2395, lng:21.0456, icon:'Z' },
+    { name:'Expo: EXPO XXI', lat:52.2289, lng:20.9640, icon:'E' },
+  ];
+  const sights = [
+    ['Altstadtmarkt',52.2497,21.0122],['Königsschloss',52.2477,21.0137],['Barbakane',52.2516,21.0098],
+    ['Kulturpalast',52.2318,21.0060],['Aufstandsmuseum',52.2323,20.9810],['Präsidentenpalast',52.2432,21.0154],
+    ['Łazienki-Park',52.2150,21.0350],['POLIN-Museum',52.2494,20.9930],['Kopernikus-Zentrum',52.2419,21.0287],
+    ['Hala Koszyki',52.2226,21.0123],['Browary Warszawskie',52.2337,20.9862],['Café Blikle',52.2347,21.0198]
+  ];
+
+  /* map: OpenFreeMap (freie OSM-Vektorkarten, kein API-Key, keine Limits) + MapLibre */
+  let map = null; const markers = {};
+  function addPin(lng, lat, html, popup, cls){
+    const el = document.createElement('div');
+    el.innerHTML = html; el.style.cursor = 'pointer';
+    const m = new maplibregl.Marker({ element:el, anchor: cls === 'dot' ? 'center' : 'bottom' })
+      .setLngLat([lng, lat]).setPopup(new maplibregl.Popup({ offset: cls === 'dot' ? 10 : 26, closeButton:false }).setHTML(popup)).addTo(map);
+    return { m, el };
+  }
+  const pinHTML = (color, txt) => `<div class="pin" style="background:${color}"><span>${txt}</span></div>`;
+  if (window.maplibregl){
+    try{
+      map = new maplibregl.Map({ container:'map', style:'https://tiles.openfreemap.org/styles/liberty',
+        center:[21.012, 52.239], zoom:12.2, cooperativeGestures:true, attributionControl:{ compact:true } });
+      map.addControl(new maplibregl.NavigationControl({ showCompass:false }), 'top-left');
+      hotels.forEach((h,i) => {
+        const p = addPin(h.lng, h.lat, pinHTML('#1f4e79', i+1), `<b>${h.name}</b><br>${h.addr}<br>Zum Start: ${h.toStart}`);
+        markers[h.id] = p.m;
+        p.el.addEventListener('click', () => highlight(h.id, true));
+      });
+      race.forEach(r => addPin(r.lng, r.lat, pinHTML('#d7263d', r.icon), `<b>${r.name}</b>`));
+      sights.forEach(([n,la,ln]) => addPin(ln, la, '<div style="width:14px;height:14px;border-radius:50%;background:#2e7d4f;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4)"></div>', n, 'dot'));
+    }catch(err){ map = null; document.getElementById('map').innerHTML = '<p style="padding:20px;color:var(--muted)">Karte konnte nicht geladen werden.</p>'; }
+  } else {
+    document.getElementById('map').innerHTML = '<p style="padding:20px;color:var(--muted)">Karte konnte nicht geladen werden (offline?).</p>';
+  }
+
+  let favs = store.get('waw-favs', []);
+  let filter = 'all';
+  const list = document.getElementById('hotelList');
+  const stars = n => '★'.repeat(n);
+  function renderHotels(){
+    const sort = document.getElementById('sort').value;
+    let arr = hotels.slice();
+    if (filter === 'breakfast') arr = arr.filter(h => h.breakfast);
+    else if (filter === 'fav') arr = arr.filter(h => favs.includes(h.id));
+    else if (filter !== 'all') arr = arr.filter(h => h.tags.includes(filter));
+    const sorters = { rec:(a,b)=>a.rec-b.rec, price:(a,b)=>a.price[0]-b.price[0], score:(a,b)=>b.score-a.score, start:(a,b)=>a.startMin-b.startMin };
+    arr.sort(sorters[sort]);
+    if (!arr.length){ list.innerHTML = '<p style="color:var(--muted)">Keine Hotels für diesen Filter. Markiere welche mit ☆.</p>'; return; }
+    list.innerHTML = arr.map(h => {
+      const num = hotels.indexOf(h) + 1;
+      const isFav = favs.includes(h.id);
+      const badges = [
+        h.label ? `<span class="badge top">${h.label}</span>` : '',
+        `<span class="badge">${stars(h.stars)}</span>`,
+        h.breakfast ? '<span class="badge green">Frühstück inkl.</span>' : '<span class="badge">Frühstück optional</span>',
+        h.tags.includes('budget') ? '<span class="badge gold">günstig</span>' : ''
+      ].join('');
+      return `<article class="hotel" data-id="${h.id}">
+        <div class="hotel-head">
+          <div><h3>${num}. ${h.name}</h3><div class="addr">${h.addr}</div></div>
+          <div class="score"><b>${h.score.toFixed(1)}</b><small>${h.scoreSrc}</small></div>
+        </div>
+        <div class="badges">${badges}</div>
+        <p>${h.text}</p>
+        <div class="metrics">
+          <div class="metric"><small>Zum Start</small><b>${h.toStart}</b></div>
+          <div class="metric"><small>Zur Altstadt</small><b>${h.toOld}</b></div>
+          <div class="metric"><small>Richtpreis / Zi. / Nacht</small><b>ca. ${h.price[0]}–${h.price[1]} €</b></div>
+        </div>
+        <div class="actions">
+          <a class="btn primary" href="${bookingUrl(h.name)}" target="_blank" rel="noopener">Preise in € ansehen ↗</a>
+          <a class="btn" href="${mapsUrl(h.name + ' ' + h.addr.split('·')[0])}" target="_blank" rel="noopener">📍 Maps</a>
+          <button class="btn fav" data-fav="${h.id}" aria-pressed="${isFav}">${isFav ? '★ Favorit' : '☆ Merken'}</button>
+        </div>
+      </article>`;
+    }).join('');
+  }
+  function highlight(id, scroll){
+    document.querySelectorAll('.hotel').forEach(el => el.classList.toggle('active', el.dataset.id === id));
+    const el = document.querySelector(`.hotel[data-id="${id}"]`);
+    if (scroll && el) el.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  }
+  list.addEventListener('click', e => {
+    const favBtn = e.target.closest('[data-fav]');
+    if (favBtn){
+      const id = favBtn.dataset.fav;
+      favs = favs.includes(id) ? favs.filter(x => x !== id) : favs.concat(id);
+      store.set('waw-favs', favs); renderHotels(); updateShare(); highlight(id); return;
+    }
+    if (e.target.closest('a')) return;
+    const card = e.target.closest('.hotel');
+    if (card && map){
+      const h = hotels.find(x => x.id === card.dataset.id);
+      highlight(h.id);
+      map.flyTo({ center:[h.lng,h.lat], zoom:15 });
+      Object.values(markers).forEach(m => m.getPopup().isOpen() && m.togglePopup());
+      markers[h.id].togglePopup();
+    }
+  });
+  document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
+    document.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', x === c));
+    filter = c.dataset.filter; renderHotels();
+  }));
+  document.getElementById('sort').addEventListener('change', renderHotels);
+
+  function favText(){
+    const chosen = hotels.filter(h => favs.includes(h.id));
+    return 'Warschau Halbmarathon 12.–14.03.2027 – meine Hotel-Favoriten:\n' +
+      chosen.map(h => `• ${h.name} (${h.score.toFixed(1)}, ca. ${h.price[0]}–${h.price[1]} €/Nacht)\n  ${bookingUrl(h.name)}`).join('\n') +
+      '\n\nDie ganze Übersicht: ' + location.href.split('#')[0];
+  }
+  function updateShare(){
+    const n = favs.length;
+    document.getElementById('favCount').textContent = n ? `${n} Favorit${n>1?'en':''} markiert, an die Gruppe schicken:` : 'Markiere Hotels mit ☆ und schick deine Auswahl an die Gruppe.';
+    const t = favText();
+    document.getElementById('shareWa').href = 'https://wa.me/?text=' + encodeURIComponent(n ? t : 'Warschau Halbmarathon-Wochenende: ' + location.href.split('#')[0]);
+    document.getElementById('shareMail').href = 'mailto:?subject=' + encodeURIComponent('Warschau Halbmarathon – Hotels') + '&body=' + encodeURIComponent(n ? t : location.href.split('#')[0]);
+  }
+  document.getElementById('copyFav').addEventListener('click', async e => {
+    try{ await navigator.clipboard.writeText(favs.length ? favText() : location.href); e.target.textContent = '✓ Kopiert'; }
+    catch(err){ e.target.textContent = 'Kopieren ging nicht'; }
+    setTimeout(() => e.target.textContent = '📋 Kopieren', 1800);
+  });
+
+  renderHotels(); updateShare();
+})();
+</script>
+</body>
+</html>
